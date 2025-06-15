@@ -51,4 +51,6 @@ app.hooks({
   teardown: []
 })
 
+console.log('Postgres client initialized:', app.get('postgresqlClient').client.config)
+console.log('Postgres connection config:', app.get('postgresql'))
 export { app }
