@@ -11,7 +11,10 @@ import type { TodosService } from './todos.class'
 export const todosSchema = Type.Object(
   {
     id: Type.Number(),
-    text: Type.String()
+    text: Type.String(),
+    completed: Type.Boolean(),
+    created_at: Type.Optional(Type.String()),
+    updated_at: Type.Optional(Type.String())
   },
   { $id: 'Todos', additionalProperties: false }
 )
