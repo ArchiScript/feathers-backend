@@ -58,10 +58,11 @@
     "@feathersjs/socketio": "^5.0.34",
     "@feathersjs/transport-commons": "^5.0.34",
     "@feathersjs/typebox": "^5.0.34",
+    "dotenv": "^16.5.0",
     "knex": "^3.1.0",
     "pg": "^8.15.6",
-    "winston": "^3.17.0",
-    "shx": "^0.4.0"
+    "shx": "^0.4.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@feathersjs/cli": "^5.0.34",

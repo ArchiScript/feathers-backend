@@ -1,7 +1,21 @@
-// For more information about this file see https://dove.feathersjs.com/guides/cli/databases.html
-import { app } from './src/app'
+import type { Knex } from 'knex';
+import dotenv from 'dotenv';
+dotenv.config(); // load .env early
 
-// Load our database connection info from the app configuration
-const config = app.get('postgresql')
+const sharedConfig: Knex.Config = {
+  client: 'pg',
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false } // Required for Render external DB
+  },
+  migrations: {
+    directory: './migrations'
+  }
+};
 
-module.exports = config
+const config: { [key: string]: Knex.Config } = {
+  development: sharedConfig,
+  production: sharedConfig
+};
+
+module.exports = config;
