@@ -13,8 +13,8 @@ export const todosSchema = Type.Object(
     id: Type.Number(),
     text: Type.String(),
     completed: Type.Boolean(),
-    created_at: Type.Optional(Type.String()),
-    updated_at: Type.Optional(Type.String())
+    created_at: Type.Optional(Type.String({ format: 'date-time' })),
+    updated_at: Type.Optional(Type.String({ format: 'date-time' })),
   },
   { $id: 'Todos', additionalProperties: false }
 )
