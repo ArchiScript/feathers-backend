@@ -1,12 +1,19 @@
 import type { Knex } from 'knex';
 import dotenv from 'dotenv';
-dotenv.config(); // load .env early
+import { parse } from 'pg-connection-string';
+dotenv.config();
+
+const pgConfig = parse(process.env.DATABASE_URL!);
 
 const sharedConfig: Knex.Config = {
   client: 'pg',
   connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: { rejectUnauthorized: false } // Required for Render external DB
+    host: pgConfig.host ?? undefined,
+    port: pgConfig.port ? parseInt(pgConfig.port) : 5432,
+    user: pgConfig.user,
+    password: pgConfig.password,
+    database: pgConfig.database ?? undefined,
+    ssl: { rejectUnauthorized: false }
   },
   migrations: {
     directory: './migrations'
