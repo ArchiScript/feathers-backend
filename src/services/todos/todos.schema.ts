@@ -25,9 +25,13 @@ export const todosResolver = resolve<Todos, HookContext<TodosService>>({})
 export const todosExternalResolver = resolve<Todos, HookContext<TodosService>>({})
 
 // Schema for creating new entries
-export const todosDataSchema = Type.Pick(todosSchema, ['text'], {
-  $id: 'TodosData'
-})
+export const todosDataSchema = Type.Object(
+  {
+    text: Type.String(),
+    completed: Type.Optional(Type.Boolean())
+  },
+  { $id: 'TodosData' }
+)
 export type TodosData = Static<typeof todosDataSchema>
 export const todosDataValidator = getValidator(todosDataSchema, dataValidator)
 export const todosDataResolver = resolve<Todos, HookContext<TodosService>>({})
@@ -41,7 +45,7 @@ export const todosPatchValidator = getValidator(todosPatchSchema, dataValidator)
 export const todosPatchResolver = resolve<Todos, HookContext<TodosService>>({})
 
 // Schema for allowed query properties
-export const todosQueryProperties = Type.Pick(todosSchema, ['id', 'text'])
+export const todosQueryProperties = Type.Pick(todosSchema, ['id', 'text', 'completed'])
 export const todosQuerySchema = Type.Intersect(
   [
     querySyntax(todosQueryProperties),
